@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { SelectBudgetOptions } from "@/constants/options";
+import { AI_PROMPT, SelectBudgetOptions } from "@/constants/options";
 import { SelectTravelesList } from "@/constants/options";
 import { Button } from "@/components/ui/button";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { toast } from "sonner";
+import { generateTrip } from "@/service/AIModal";
 
 
 function CreateTrip() {
@@ -22,12 +24,23 @@ function CreateTrip() {
 
   }
 
-  const OnGenerateTrpi=()=>{
-    if(formData?.noOfDays>5)
+  const OnGenerateTrpi= async()=>{
+    if(formData?.noOfDays>5 || !formData?.location || !formData?.budget || !formData?.noOfDays ||
+      !formData?.noOfPeople)
     {
+      toast("Please fill all details")
       return;
     }
-    console.log(formData)
+    
+    const FINAL_PROMPT=AI_PROMPT
+    .replace(' {location}', formData?.location?.label)
+    .replace('{totalDays}', formData?.noOfDays)
+    .replace('{traveler}', formData?.noOfPeople)
+    .replace('{budget}', formData?.budget)
+    console.log(FINAL_PROMPT);
+
+    const result = await generateTrip(FINAL_PROMPT);
+    console.log(result);
   }
 
   useEffect(()=>{console.log(formData)}, [formData])

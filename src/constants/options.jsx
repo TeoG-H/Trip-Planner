@@ -50,4 +50,67 @@ export const SelectBudgetOptions=[
  },
 ]
 
-export const AI_PROMPT='Generate Travel Plan for Location : {location}'
+export const AI_PROMPT = `
+Generate a Travel Plan for Location: {location} for {totalDays} Days for {traveler} with a {budget} budget.
+
+Give me a Hotels options list with:
+- HotelName
+- HotelAddress
+- Price
+- HotelImageUrl
+- GeoCoordinates
+- Rating
+- Description
+
+Also suggest a detailed itinerary for each day.
+
+For the itinerary include:
+- Day (Day 1, Day 2, ...)
+- Time slots
+- PlaceName
+- PlaceDetails
+- PlaceImageUrl
+- GeoCoordinates
+- TicketPricing
+- TimeToTravel
+
+Return the result STRICTLY in JSON format using EXACTLY this structure:
+
+{
+  "hotels": [
+    {
+      "hotelName": "",
+      "hotelAddress": "",
+      "price": "",
+      "hotelImageUrl": "",
+      "geoCoordinates": "lat, lng",
+      "rating": "",
+      "description": ""
+    }
+  ],
+  "itinerary": [
+    {
+      "day": "Day 1",
+      "plan": [
+        {
+          "time": "",
+          "placeName": "",
+          "placeDetails": "",
+          "placeImageUrl": "",
+          "geoCoordinates": "lat, lng",
+          "ticketPricing": "",
+          "timeToTravel": ""
+        }
+      ]
+    }
+  ]
+}
+
+Rules:
+- Include at least 4 hotel options.
+- Include plans for all {totalDays} days.
+- Each day must contain multiple places and time slots.
+- Use realistic places, prices, and coordinates.
+- Do NOT add or remove fields.
+- Do NOT include explanations, markdown, or text outside the JSON.
+`;
