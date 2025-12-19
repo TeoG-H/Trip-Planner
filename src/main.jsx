@@ -8,6 +8,8 @@ import CreateTrip from './create-trip/index.jsx'
 import Header from './components/custom/Header'
 import { Toaster } from 'sonner'
 import { GoogleOAuthProvider } from "@react-oauth/google";
+
+// creeaza un obiect de rutare: daca URL din browser este .. afiseaza ..
 const router=createBrowserRouter([
 {
   path:'/',
