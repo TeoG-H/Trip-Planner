@@ -19,6 +19,7 @@ import axios from "axios";
 import { doc, setDoc } from "firebase/firestore"; 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { db } from "@/service/firebaseConfig";
+import { useNavigate} from "react-router-dom";
 
 
 function CreateTrip() {
@@ -29,7 +30,7 @@ function CreateTrip() {
   const [formData, setFormData] = useState({});      // prima data datele sunt reprezentate de un obiect gol
   const [loading, setLoading]=useState(false);
 
-
+  const navigate=useNavigate();
   // e apelat la orice input
   const handleInputChange = (name, value) => {
     if (name === "noOfDays" && value > 5) {
@@ -93,6 +94,7 @@ function CreateTrip() {
 
 });
 setLoading(false);
+navigate('/view-trip/'+documentId)
 
 
   }
