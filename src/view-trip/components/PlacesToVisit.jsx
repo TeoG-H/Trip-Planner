@@ -2,6 +2,7 @@ import React from 'react'
 import PlaceCardItem from './PlaceCardItem'
 
 function PlacesToVisit({trip}) {
+    
   return (
     <div className='mt-4'>
         <h2 className='font bold text-lg'> Places tot visit </h2>

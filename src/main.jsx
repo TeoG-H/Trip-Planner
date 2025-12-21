@@ -32,7 +32,7 @@ createRoot(document.getElementById('root')).render(
      <GoogleOAuthProvider
       clientId={import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}
     >
-    <Header/>
+    {/*<Header/>*/}
     <Toaster/>
     <RouterProvider router={router}/>
     </GoogleOAuthProvider>
