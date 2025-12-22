@@ -10,6 +10,7 @@ import { Toaster } from 'sonner'
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Viewtrip from './view-trip'
 
+
 // creeaza un obiect de rutare: daca URL din browser este .. afiseaza ..
 const router=createBrowserRouter([
 {

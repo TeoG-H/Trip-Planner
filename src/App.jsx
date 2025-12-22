@@ -10,9 +10,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className=' h-screen overflow-hidden bg-cover bg-center flex flex-col' style={{backgroundImage: "url('/logo11.png')"}}>
-      <Header/>
-      <Hero/>
+    <div className=' h-screen  bg-cover bg-top flex flex-col' style={{backgroundImage: "url('/logo11.png')"}}>
+        <Hero />
     </div>
   )
 }

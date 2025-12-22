@@ -7,6 +7,9 @@ import InfoSection from './components/InfoSection';
 import Hotels from './components/Hotels';
 import PlacesToVisit from './components/PlacesToVisit';
 import Footer from './components/Footer';
+import Activities from "./components/Activities";
+import Restaurants from './components/Restaurants';
+import Videos from './components/Videos';
 
 function Viewtrip() {
 
@@ -34,8 +37,11 @@ function Viewtrip() {
   return (
     <div className='p-10 md:px-20 lg:px-44 xl:px'>
       <InfoSection trip={trip}/>
+      <Activities trip={trip} />
+      <Restaurants trip={trip} />
       <Hotels trip={trip}/>
       <PlacesToVisit trip={trip}/>
+      <Videos trip={trip} />
       <Footer trip={trip}/>
 
 

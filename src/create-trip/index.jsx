@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { AI_PROMPT, SelectBudgetOptions } from "@/constants/options";
-import { SelectTravelesList } from "@/constants/options";
+import { AI_PROMPT, SelectTravelesList, SelectBudgetOptions, SelectPreference, SelectTransportMode,SelectTravelPace,SelectTravelerType } from "@/constants/options";
 import { Button } from "@/components/ui/button";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { toast } from "sonner";
@@ -20,6 +19,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { db } from "@/service/firebaseConfig";
 import { useNavigate} from "react-router-dom";
+import Header from "@/components/custom/Header";
+
+
 
 
 function CreateTrip() {
@@ -27,7 +29,7 @@ function CreateTrip() {
 
   const [place, setPlace] = useState();
   const [openDailog, setOpenDailog] = useState(false);
-  const [formData, setFormData] = useState({});      // prima data datele sunt reprezentate de un obiect gol
+  const [formData, setFormData] = useState({travelPreference: []});      // prima data datele sunt reprezentate de un obiect gol
   const [loading, setLoading]=useState(false);
 
   const navigate=useNavigate();
@@ -41,6 +43,21 @@ function CreateTrip() {
     setFormData({ ...formData, [name]: value });// seteaza data ca fiind un obiect nou {copie inf din obiectul vechi si ii adaug avaloarea}
   };
 
+  const handleMultiSelect = (name, value) => {
+  setFormData((p) => {
+    const currentValues = p[name] || [];
+
+    //daca in lista este inclusa valoarea cu care apelez functia atunci o elemin daca nu o adaug
+    const updatedValues = currentValues.includes(value)
+      ? currentValues.filter((item) => item !== value) // scoate
+      : [...currentValues, value]; // adauga
+
+    return {
+      ...p,
+      [name]: updatedValues,
+    };
+  });
+};
 
   const OnGenerateTrpi = async () => {
 
@@ -51,7 +68,8 @@ function CreateTrip() {
         return;
       }
 
-      if ( formData?.noOfDays > 5 || !formData?.location || !formData?.budget || !formData?.noOfDays || !formData?.noOfPeople) 
+      if ( formData?.noOfDays > 5 || !formData?.location || !formData?.budget || !formData?.noOfDays || !formData?.noOfPeople || 
+        !formData?.transportMode  || !formData?.travelPace || !formData?.travelType) 
       {
         toast("Please fill all details");
         return;
@@ -59,10 +77,15 @@ function CreateTrip() {
 
       setLoading(true);
       // fac promptul final inlocuind in promptul din const detalii specifice
-      const FINAL_PROMPT = AI_PROMPT.replace("{location}", formData?.location?.label)
-        .replace("{totalDays}", formData?.noOfDays)
-        .replace("{traveler}", formData?.noOfPeople)
-        .replace("{budget}", formData?.budget);
+      const FINAL_PROMPT = AI_PROMPT
+      .replace("{location}", formData.location.label)
+      .replace("{totalDays}", formData.noOfDays)
+      .replace("{traveler}", formData.noOfPeople)
+      .replace("{budget}", formData.budget)
+      .replace("{transportMode}", formData.transportMode || "No specific transportation preference.")
+      .replace("{travelPace}", formData.travelPace || "Balanced travel pace.")
+      .replace("{travelerType}", formData.travelType || "General traveler.")
+      .replace("{travelPreference}",formData.travelPreference?.length ? formData.travelPreference.join(", ") : "No specific preferences.");
 
     // console.log(FINAL_PROMPT);
 
@@ -125,7 +148,9 @@ navigate('/view-trip/'+documentId)
   };
 
   return (
-
+    <div>
+    <Header/>
+    
     <div className="mt-10 px-5 max-w-4xl mx-auto gap-10 mb-10">
       <h2 className="font-bold text-3xl">
         Tell us your travel preference
@@ -199,6 +224,80 @@ navigate('/view-trip/'+documentId)
         </div>
       </div>
 
+      <div>
+        <h2 className="text-xl my-3 font-medium">
+          What mode of transportation will you use?
+        </h2>
+
+        <div className="grid grid-cols-3 gap-5 mt-5">
+          {SelectTransportMode.map((item, index) => (
+            <div key={index} onClick={() => handleInputChange("transportMode", item.aiHint) }
+              className={`p-4 border cursor-pointer rounded-xl hover:shadow-lg ${ formData?.transportMode === item.aiHint && "shadow-2xl border-black"}`}
+            >
+              <h2 className="text-4xl">{item.icon}</h2>
+              <h2 className="font-bold text-lg">{item.title}</h2>
+              <h2 className="text-sm text-gray-500">{item.desc}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-xl my-3 font-medium"> How would you like to pace your trip? </h2>
+
+        <div className="grid grid-cols-3 gap-5 mt-5">
+          {SelectTravelPace.map((item, index) => (
+            <div key={index} onClick={() => handleInputChange("travelPace", item.aiHint) }
+              className={`p-4 border cursor-pointer rounded-xl hover:shadow-lg ${ formData?.travelPace === item.aiHint && "shadow-2xl border-black"}`}
+            >
+              <h2 className="text-4xl">{item.icon}</h2>
+              <h2 className="font-bold text-lg">{item.title}</h2>
+              <h2 className="text-sm text-gray-500">{item.desc}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      <div>
+        <h2 className="text-xl my-3 font-medium"> Who are you traveling with? </h2>
+
+        <div className="grid grid-cols-3 gap-5 mt-5">
+          {SelectTravelerType.map((item, index) => (
+            <div key={index} onClick={() => handleInputChange("travelType", item.aiHint) }
+              className={`p-4 border cursor-pointer rounded-xl hover:shadow-lg ${ formData?.travelType === item.aiHint && "shadow-2xl border-black"}`}
+            >
+              <h2 className="text-4xl">{item.icon}</h2>
+              <h2 className="font-bold text-lg">{item.title}</h2>
+              <h2 className="text-sm text-gray-500">{item.desc}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      <div>
+        <h2 className="text-xl my-3 font-medium"> What type of experiences do you enjoy the most? </h2>
+
+        <div className="grid grid-cols-3 gap-5 mt-5">
+          {SelectPreference.map((item, index) => (
+            <div key={index} onClick={() => handleMultiSelect("travelPreference", item.desc) }
+              className={`p-4 border cursor-pointer rounded-xl hover:shadow-lg ${ formData?.travelPreference.includes(item.desc) && "shadow-2xl border-black"}`}
+            >
+              <h2 className="text-4xl">{item.icon}</h2>
+              <h2 className="font-bold text-lg">{item.title}</h2>
+              <h2 className="text-sm text-gray-500">{item.desc}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
+
+
+
       <div className="mt-10 justify-end flex">
          {/* butonul nu mai este activ cand procesul este in loading*/}
         <Button disable={loading}  onClick={OnGenerateTrpi}>
@@ -223,6 +322,7 @@ navigate('/view-trip/'+documentId)
           </DialogHeader>
         </DialogContent>
       </Dialog>
+    </div>
     </div>
   );
 }
