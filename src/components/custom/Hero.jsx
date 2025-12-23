@@ -11,8 +11,8 @@ function Hero() {
               
       </div>
     
-    <div className=" flex flex-col justify-end items-center min-h-[calc(100vh-4rem)] pb-32 mx-4 md:mx-12 lg:mx-32 gap-3 text-center">
-      <h1 className=" font-extrabold text-[clamp(1.4rem,3vw,2.2rem)]">
+    <div className=" flex flex-col justify-center items-end min-h-[calc(100vh-4rem)] pb-32 mx-4 md:mx-12 lg:mx-32 gap-3 text-right">
+      <h1 className=" font-extrabold text-[clamp(1.4rem,3vw,2.2rem)] max-w-xl">
         Make your next vacation unforgettable with{" "}
         <span className=" inline-block bg-gradient-to-r
       from-[#2aa7c9]

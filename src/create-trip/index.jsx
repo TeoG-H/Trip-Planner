@@ -20,7 +20,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { db } from "@/service/firebaseConfig";
 import { useNavigate} from "react-router-dom";
 import Header from "@/components/custom/Header";
-
+import RevealOnScroll from "./RevealOnScroll";
 
 
 
@@ -31,6 +31,17 @@ function CreateTrip() {
   const [openDailog, setOpenDailog] = useState(false);
   const [formData, setFormData] = useState({travelPreference: []});      // prima data datele sunt reprezentate de un obiect gol
   const [loading, setLoading]=useState(false);
+  const heroRef = RevealOnScroll();
+const destinationRef = RevealOnScroll();
+const daysRef = RevealOnScroll();
+const budgetRef = RevealOnScroll();
+const travelersRef = RevealOnScroll();
+const transportRef = RevealOnScroll();
+const paceRef = RevealOnScroll();
+const typeRef = RevealOnScroll();
+const preferenceRef = RevealOnScroll();
+const buttonRef = RevealOnScroll();
+
 
   const navigate=useNavigate();
   // e apelat la orice input
@@ -148,21 +159,46 @@ navigate('/view-trip/'+documentId)
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen overflow-hidden">
+
+    {/* Gradient principal: alb în centru, albastru pal pe margini */}
+    <div
+      className="pointer-events-none absolute inset-0 -z-10"
+      style={{
+        background: `
+          radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #ffffff 45%,
+            #eaf7fb 70%,
+            #dff2f8 100%
+          )
+        `
+      }}
+    />
+
+    {/* Glow discret stânga sus */}
+    <div className="pointer-events-none absolute -top-48 -left-48 w-[600px] h-[600px]
+      bg-[#5fd3e6]/20 rounded-full blur-[120px] -z-10" />
+
+    {/* Glow discret dreapta jos */}
+    <div className="pointer-events-none absolute -bottom-48 -right-48 w-[600px] h-[600px]
+      bg-[#5fd3e6]/20 rounded-full blur-[120px] -z-10" />
+
     <Header/>
     
-    <div className="mt-10 px-5 max-w-4xl mx-auto gap-10 mb-10">
-      <h2 className="font-bold text-3xl">
-        Tell us your travel preference
+    <div ref={heroRef} className="transition-all duration-700 ease-out mt-16 px-8 max-w-5xl mx-auto  mb-10">
+      <h2 className="font-extrabold text-5xl md:text-6xl tracking-tight">
+       Let’s plan your next adventure
       </h2>
 
-      <p className="mt-3 text-gray-400">
-        spune ce obiective vrei sa vezi ce te pasioneaza
+      <p className="mt-5 text-lg text-gray-500 max-w-2xl">
+        Fill in the details below to generate a personalized travel plan.
       </p>
 
-      <div className="mt-10 flex flex-col gap-10">
+      <div className="mt-16 flex flex-col gap-20">
         <div>
-          <h2 className="text-xl my-3 font-medium">
+          <h2 className="text-2xl my-3 font-bold">
             What is your destination?
           </h2>
 
@@ -177,16 +213,16 @@ navigate('/view-trip/'+documentId)
           />
         </div>
 
-        <div>
-          <h2 className="text-xl my-3 font-medium">
+        <div ref={daysRef}>
+          <h2 className="text-2xl my-3 font-bold">
             How many days are you planning your trip?
           </h2>
           <Input placeholder="ex.3" type="number" onChange={(e) => handleInputChange("noOfDays", e.target.value)}/>
         </div>
       </div>
 
-      <div>
-        <h2 className="text-xl my-3 font-medium">
+      <div  ref={budgetRef}>
+        <h2 className="text-2xl my-5 font-bold">
           What is your budget?
         </h2>
 
@@ -194,20 +230,23 @@ navigate('/view-trip/'+documentId)
           {/*SelectBudgetOptions este o lista de obiecte din const, pt fiecare obiect returneaza cate un <></>*/}
           {SelectBudgetOptions.map((item, index) => (
             <div key={index} onClick={ () => handleInputChange("budget", item.title /*item.title din constante*/ ) }
-              className={`p-4 border cursor-pointer rounded-xl hover:shadow-lg ${formData?.budget === item.title && "shadow-2xl border-black"}`}  
+              className={`p-6 rounded-2xl border bg-white/80 backdrop-blur-sm
+  cursor-pointer transition-all duration-500
+  hover:-translate-y-1 hover:shadow-xl
+  hover:border-[#5fd3e6] ${formData?.budget === item.title && "border-[#5fd3e6] shadow-2xl bg-[#f5fdff]"}`}  
                 //daca este selectat (adica se afla in formData) ii aplica shadow-2xl
                 // acel && e echivalenul la if true
             >
-              <h2 className="text-4xl">{item.icon}</h2>
-              <h2 className="font-bold text-lg">{item.title}</h2>
-              <h2 className="text-sm text-gray-500">{item.desc}</h2>
+              <h2 className="text-4xl mb-4 ">{item.icon}</h2>
+              <h2 className="font-semibold text-xl">{item.title}</h2>
+              <h2 className="text-sm text-gray-500 mt-1">{item.desc}</h2>
             </div>
           ))}
         </div>
       </div>
 
-      <div>
-        <h2 className="text-xl my-3 font-medium">
+      <div ref={travelersRef}>
+        <h2 className="text-2xl my-5 font-bold">
           Who do you plan on traveling with?
         </h2>
 
@@ -224,8 +263,8 @@ navigate('/view-trip/'+documentId)
         </div>
       </div>
 
-      <div>
-        <h2 className="text-xl my-3 font-medium">
+      <div ref={transportRef}>
+        <h2 className="text-2xl my-5 font-bold">
           What mode of transportation will you use?
         </h2>
 
@@ -242,8 +281,8 @@ navigate('/view-trip/'+documentId)
         </div>
       </div>
 
-      <div>
-        <h2 className="text-xl my-3 font-medium"> How would you like to pace your trip? </h2>
+      <div ref={paceRef}>
+        <h2 className="text-2xl my-5 font-bold"> How would you like to pace your trip? </h2>
 
         <div className="grid grid-cols-3 gap-5 mt-5">
           {SelectTravelPace.map((item, index) => (
@@ -259,8 +298,8 @@ navigate('/view-trip/'+documentId)
       </div>
 
 
-      <div>
-        <h2 className="text-xl my-3 font-medium"> Who are you traveling with? </h2>
+      <div ref={typeRef}>
+        <h2 className="text-2xl my-5 font-bold"> Who are you traveling with? </h2>
 
         <div className="grid grid-cols-3 gap-5 mt-5">
           {SelectTravelerType.map((item, index) => (
@@ -276,8 +315,8 @@ navigate('/view-trip/'+documentId)
       </div>
 
 
-      <div>
-        <h2 className="text-xl my-3 font-medium"> What type of experiences do you enjoy the most? </h2>
+      <div ref={preferenceRef}>
+        <h2 className="text-2xl my-5 font-bold"> What type of experiences do you enjoy the most? </h2>
 
         <div className="grid grid-cols-3 gap-5 mt-5">
           {SelectPreference.map((item, index) => (
@@ -298,9 +337,15 @@ navigate('/view-trip/'+documentId)
 
 
 
-      <div className="mt-10 justify-end flex">
+      <div ref={buttonRef} className="mt-10 justify-end flex">
          {/* butonul nu mai este activ cand procesul este in loading*/}
-        <Button disable={loading}  onClick={OnGenerateTrpi}>
+        <Button disable={loading}  onClick={OnGenerateTrpi} 
+        className="
+    px-10 py-6 rounded-full text-lg font-semibold
+    bg-gradient-to-r from-[#2aa7c9] to-[#5fd3e6]
+    hover:shadow-[0_20px_40px_rgba(95,211,230,0.35)]
+    transition-all duration-300
+  ">
            {loading? <AiOutlineLoading3Quarters  className="h-7 w-7 animate-spin"/>: 'Generate Trip' }          
         </Button>
       </div>

@@ -15,18 +15,33 @@ function PlaceCardItem({place}) {
           
               useEffect(()=>{place&&GetPlacePhoto()},[place])
               {/*aici pot sa adau mai multe inf ca sa obtin un rasp mai bun*/}
-              const GetPlacePhoto=async()=>{
-                  const data={
-                      textQuery:place.placeName 
-                  }
-                  const result=await GetPlaceDetails(data);
-                  console.log(result.data.places[0].photos[3].name);
-                  const PhotoUrl=PHOTO_REF_URL.replace('{NAME}',result.data.places[0].photos[0].name );
-                  console.log(PhotoUrl);
-                  setPhotoUrl(PhotoUrl);
-          
+              const GetPlacePhoto = async () => {
+  try {
+    const base = place.placeName;
+
+    const queries = [
+      `${base} landmark`,
+      `${base} tourist attraction`,
+      `${base} panorama`,
+      `${base} historic site`,
+      base,
+    ];
+
+    for (const q of queries) {
+      const result = await GetPlaceDetails({ textQuery: q });
+      const photos = result?.data?.places?.[0]?.photos;
+      const photoName = photos?.[1]?.name || photos?.[0]?.name;
+
+      if (photoName) {
+        setPhotoUrl(PHOTO_REF_URL.replace("{NAME}", photoName));
+        break;
       }
-  
+    }
+  } catch {
+    console.log("No photo found for place:", place.placeName);
+  }
+};
+
   
   return (
     <Link to={'https://www.google.com/maps/search/?api=1&query='+place.placeName} target='_blank'>

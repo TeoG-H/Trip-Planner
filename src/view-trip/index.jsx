@@ -10,16 +10,26 @@ import Footer from './components/Footer';
 import Activities from "./components/Activities";
 import Restaurants from './components/Restaurants';
 import Videos from './components/Videos';
+import RevealOnScroll from '@/create-trip/RevealOnScroll';
 
 function Viewtrip() {
 
   const {tripId}=useParams();
   const [trip, setTrip]=useState();
 
+  const infoRef = RevealOnScroll();
+  const activitiesRef = RevealOnScroll();
+  const restaurantsRef = RevealOnScroll();
+  const hotelsRef = RevealOnScroll();
+  const placesRef = RevealOnScroll();
+  const videosRef = RevealOnScroll();
+  const footerRef = RevealOnScroll();
+
+
   //se excuta getTripData doar cand exista tripId
   useEffect(()=>{tripId&&GetTripData()},[tripId])
 
-  const GetTripData=async()=>{
+    const GetTripData=async()=>{
     const docRef=doc(db, 'AITrips', tripId);
     const docSnap=await getDoc(docRef);
 
@@ -35,17 +45,36 @@ function Viewtrip() {
     }
   }
   return (
-    <div className='p-10 md:px-20 lg:px-44 xl:px'>
-      <InfoSection trip={trip}/>
-      <Activities trip={trip} />
-      <Restaurants trip={trip} />
-      <Hotels trip={trip}/>
-      <PlacesToVisit trip={trip}/>
-      <Videos trip={trip} />
-      <Footer trip={trip}/>
+    <div className="p-10 md:px-20 lg:px-44 xl:px">
+      <div ref={infoRef}>
+        <InfoSection trip={trip} />
+      </div>
 
+      <div ref={activitiesRef}>
+        <Activities trip={trip} />
+      </div>
 
+      <div ref={restaurantsRef}>
+        <Restaurants trip={trip} />
+      </div>
+
+      <div ref={hotelsRef}>
+        <Hotels trip={trip} />
+      </div>
+
+      <div ref={placesRef}>
+        <PlacesToVisit trip={trip} />
+      </div>
+
+      <div ref={videosRef}>
+        <Videos trip={trip} />
+      </div>
+
+      <div ref={footerRef}>
+        <Footer trip={trip} />
+      </div>
     </div>
+
   )
 }
 

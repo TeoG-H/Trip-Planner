@@ -1,21 +1,24 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-import HotelCardItem from './HotelCardItem';
+import React from "react";
+import HotelCardItem from "./HotelCardItem";
+import AnimatedItem from "./AnimatedItem";
 
 
-function Hotels({trip}) {
+function Hotels({ trip }) {
   return (
-    <div>
-        <h2 className='font-bold text-xl mt-5'>Hotel-recomandation</h2>
-    <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4  gap-5'>
-        {trip?.tripData?.hotels?.map((hotel, index)=>(
-            
-            <HotelCardItem hotel={hotel}/>
+    <div className="mt-10">
+      <h2 className="font-bold text-xl mb-8">
+        Hotel recommendations
+      </h2>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+        {trip?.tripData?.hotels?.map((hotel, index) => (
+          <AnimatedItem key={index} delay={index * 80}>
+            <HotelCardItem hotel={hotel} />
+          </AnimatedItem>
         ))}
+      </div>
     </div>
-    
-    </div>
-  )
+  );
 }
 
-export default Hotels
+export default Hotels;

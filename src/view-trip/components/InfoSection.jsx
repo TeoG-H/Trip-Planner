@@ -8,21 +8,36 @@ function InfoSection({trip}) {
     const[photoUrl, setPhotoUrl]=useState();
 
     useEffect(()=>{trip&&GetPlacePhoto()},[trip])
-    const GetPlacePhoto=async()=>{
-        const data={
-            textQuery:`${trip?.userSelection?.location?.label} city center`
-        }
-        const result=await GetPlaceDetails(data);
-        console.log(result.data.places[0].photos[0].name);
-        const PhotoUrl=PHOTO_REF_URL.replace('{NAME}',result.data.places[0].photos[0].name );
-        console.log(PhotoUrl);
-        setPhotoUrl(PhotoUrl);
+    const GetPlacePhoto = async () => {
+  try {
+    const location = trip?.userSelection?.location?.label;
 
+    const queries = [
+      `${location} skyline`,
+      `${location} old town`,
+      `${location} panorama`,
+      `${location} landmark`
+    ];
+
+    for (const q of queries) {
+      const result = await GetPlaceDetails({ textQuery: q });
+      const photoName = result?.data?.places?.[0]?.photos?.[0]?.name;
+
+      if (photoName) {
+        setPhotoUrl(PHOTO_REF_URL.replace("{NAME}", photoName));
+        break;
+      }
     }
+  } catch {
+    console.log("No hero image found");
+  }
+};
 
   return (
-    <div>
+    <div className="relative">
+        
         <img src={photoUrl} className='h-[340px] w-full object-cover rounded-xl'/>
+      
        <div className='flex justify-between items-center'> 
             <div className='my-5 flex flex-col gap-2'>
                 <h2 className='font-bold text-2xl'>

@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
+import AnimatedItem from "./AnimatedItem";
 
-function Footer({trip}) {
+
+function Footer() {
   return (
-    <div>
-        <h2 className='text-center'>Created by Tripify</h2>
-    </div>
-  )
+    <AnimatedItem>
+      <div className="mt-20 text-center text-gray-400">
+        Created by Tripify
+      </div>
+    </AnimatedItem>
+  );
 }
 
-export default Footer
+export default Footer;

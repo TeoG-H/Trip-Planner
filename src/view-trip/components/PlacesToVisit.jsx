@@ -1,33 +1,35 @@
-import React from 'react'
-import PlaceCardItem from './PlaceCardItem'
+import React from "react";
+import PlaceCardItem from "./PlaceCardItem";
+import AnimatedItem from "./AnimatedItem";
 
-function PlacesToVisit({trip}) {
-    
+
+function PlacesToVisit({ trip }) {
   return (
-    <div className='mt-4'>
-        <h2 className='font bold text-lg'> Places tot visit </h2>
-        <div>
-            {trip?.tripData?.itinerary?.map((item,index)=>(
-                
-                    <div>
-                    <h2 className='font-medium text-lg'>{item.day}</h2>
-                    <div className='grid md:grid-cols-2 gap-5'>
-                    {item.plan.map((place, index)=>(
-                        <div className='my-3'>
-                            <h2 className='font-medium text-sm text-orange-600'>{place.time}</h2>
-                            <PlaceCardItem place={place}/>
-                            
-                        </div>
+    <div className="mt-10">
+      <h2 className="font-bold text-xl mb-8">
+        Places to visit
+      </h2>
 
-                    
-                    ))}
-                    </div>
-                </div>
+      {trip?.tripData?.itinerary?.map((item, dayIndex) => (
+        <AnimatedItem key={dayIndex}>
+          <h2 className="font-medium text-lg mb-4">
+            {item.day}
+          </h2>
 
+          <div className="grid md:grid-cols-2 gap-5">
+            {item.plan.map((place, index) => (
+              <AnimatedItem key={index} delay={index * 80}>
+                <h2 className="font-medium text-sm text-orange-600">
+                  {place.time}
+                </h2>
+                <PlaceCardItem place={place} />
+              </AnimatedItem>
             ))}
-        </div>
+          </div>
+        </AnimatedItem>
+      ))}
     </div>
-  )
+  );
 }
 
-export default PlacesToVisit
+export default PlacesToVisit;
