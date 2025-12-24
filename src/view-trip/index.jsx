@@ -11,6 +11,7 @@ import Activities from "./components/Activities";
 import Restaurants from './components/Restaurants';
 import Videos from './components/Videos';
 import RevealOnScroll from '@/create-trip/RevealOnScroll';
+import Header from '@/components/custom/Header';
 
 function Viewtrip() {
 
@@ -45,7 +46,42 @@ function Viewtrip() {
     }
   }
   return (
-    <div className="p-10 md:px-20 lg:px-44 xl:px">
+    <div className="relative min-h-screen overflow-hidden">
+
+  {/* Gradient principal */}
+  <div
+    className="pointer-events-none absolute inset-0 -z-10"
+    style={{
+      background: `
+        radial-gradient(
+          circle at center,
+          #ffffff 0%,
+          #ffffff 45%,
+          #eaf7fb 70%,
+          #dff2f8 100%
+        )
+      `
+    }}
+  />
+
+  {/* Glow stânga sus */}
+  <div
+    className="pointer-events-none absolute -top-48 -left-48
+      w-[600px] h-[600px]
+      bg-[#5fd3e6]/20 rounded-full blur-[120px] -z-10"
+  />
+
+  {/* Glow dreapta jos */}
+  <div
+    className="pointer-events-none absolute -bottom-48 -right-48
+      w-[600px] h-[600px]
+      bg-[#5fd3e6]/20 rounded-full blur-[120px] -z-10"
+  />
+  <Header/>
+
+  {/* CONȚINUT */}
+  <div className="p-10 md:px-20 lg:px-44">
+
       <div ref={infoRef}>
         <InfoSection trip={trip} />
       </div>
@@ -73,6 +109,7 @@ function Viewtrip() {
       <div ref={footerRef}>
         <Footer trip={trip} />
       </div>
+    </div>
     </div>
 
   )

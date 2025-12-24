@@ -40,13 +40,16 @@ function InfoSection({trip}) {
       
        <div className='flex justify-between items-center'> 
             <div className='my-5 flex flex-col gap-2'>
-                <h2 className='font-bold text-2xl'>
+                <h2 className=' mb-4 font-extrabold text-5xl'>
                     {trip?.userSelection?.location?.label}
                 </h2>
                 <div className='flex flex-row gap-2'>
                     <h2 className='p-1 px-3 bg-gray-200 rounded-full'> {trip?.userSelection?.noOfdays} Days</h2>
                     <h2 className='p-1 px-3 bg-gray-200 rounded-full'> {trip?.userSelection?.budget} budget</h2>
                     <h2 className='p-1 px-3 bg-gray-200 rounded-full'> {trip?.userSelection?.noOfPeople} people</h2>
+ 
+                    
+
                 </div>
             </div>
             <Button>

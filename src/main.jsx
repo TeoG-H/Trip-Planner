@@ -9,22 +9,21 @@ import Header from './components/custom/Header'
 import { Toaster } from 'sonner'
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Viewtrip from './view-trip'
+import ScrollToTop from './ScrollToTop'
+import { Outlet } from "react-router-dom";
+import Layout from './Layout'
 
 
 // creeaza un obiect de rutare: daca URL din browser este .. afiseaza ..
 const router=createBrowserRouter([
 {
-  path:'/',
-  element:<App/>
-},
-{
-  path:'/create-trip',
-  element:<CreateTrip/>
-},
-{
-  path:'view-trip/:tripId',
-  element:<Viewtrip/>
-}
+    element: <Layout />,
+    children: [
+      { path: "/", element: <App /> },
+      { path: "/create-trip", element: <CreateTrip /> },
+      { path: "/view-trip/:tripId", element: <Viewtrip /> },
+    ],
+  },
 ])
 
 
@@ -35,7 +34,10 @@ createRoot(document.getElementById('root')).render(
     >
     {/*<Header/>*/}
     <Toaster/>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router}>
+  <ScrollToTop />
+</RouterProvider>
+
     </GoogleOAuthProvider>
   </StrictMode>,
 )

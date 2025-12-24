@@ -6,7 +6,7 @@ import AnimatedItem from "./AnimatedItem";
 function Restaurants({ trip }) {
   return (
     <div className="mt-10">
-      <h2 className="font-bold text-xl mb-8">
+      <h2 className="text-4xl my-5 font-extrabold bg-gradient-to-r from-blue-400 to-purple-500  bg-clip-text text-transparent">
         Recommended Restaurants
       </h2>
 

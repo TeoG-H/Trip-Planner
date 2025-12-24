@@ -21,7 +21,7 @@ function Hero() {
       bg-[length:200%_100%]
       bg-clip-text
       text-transparent
-      animate-[text-shine_6s_ease-in-out_infinite] ">Trip-Planner</span>
+      animate-[text-shine_4s_ease-in-out_infinite] ">Trip-Planner</span>
         
       </h1>
 

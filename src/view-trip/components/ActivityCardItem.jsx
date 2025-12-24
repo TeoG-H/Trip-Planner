@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GetPlaceDetails, PHOTO_REF_URL } from "@/service/GlobalApi";
+import { Link } from "react-router-dom";
+
 
 function ActivityCardItem({ activity }) {
   const [photoUrl, setPhotoUrl] = useState();
@@ -33,8 +35,15 @@ function ActivityCardItem({ activity }) {
 };
 
   return (
+    <Link
+    to={
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(activity.name + " " + activity.location)
+    }
+    target="_blank"
+  >
     <div
-      className="
+      className="group
         bg-white
         rounded-2xl
         overflow-hidden
@@ -80,7 +89,7 @@ function ActivityCardItem({ activity }) {
           {activity.category} • {activity.estimatedDuration}
         </p>
 
-        <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+        <p className="text-sm text-gray-600 mt-1 line-clamp-2 group-hover:line-clamp-none">
           {activity.description}
         </p>
 
@@ -89,6 +98,7 @@ function ActivityCardItem({ activity }) {
         </p>
       </div>
     </div>
+    </Link>
   );
 }
 
