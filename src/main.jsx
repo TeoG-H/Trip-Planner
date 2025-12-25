@@ -12,6 +12,7 @@ import Viewtrip from './view-trip'
 import ScrollToTop from './ScrollToTop'
 import { Outlet } from "react-router-dom";
 import Layout from './Layout'
+import MyTrips from './my-trips'
 
 
 // creeaza un obiect de rutare: daca URL din browser este .. afiseaza ..
@@ -22,6 +23,7 @@ const router=createBrowserRouter([
       { path: "/", element: <App /> },
       { path: "/create-trip", element: <CreateTrip /> },
       { path: "/view-trip/:tripId", element: <Viewtrip /> },
+      {path: "/my-trips", element: <MyTrips/>}
     ],
   },
 ])
