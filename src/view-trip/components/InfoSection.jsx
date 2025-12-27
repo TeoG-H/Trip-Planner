@@ -13,7 +13,7 @@ function InfoSection({trip}) {
     const location = trip?.userSelection?.location?.label;
 
     const queries = [
-      `${location} skyline`,
+      //`${location} skyline`,
       `${location} old town`,
       `${location} panorama`,
       `${location} landmark`

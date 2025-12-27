@@ -55,7 +55,7 @@ function Header() {
           { user? 
           <div className='flex gap-3'>
             <a href='/my-trips'>
-          <Button varinat="outline" className="rounded-full">My Trips</Button> 
+          <Button variant="outline" className="border-[#5fd3e6] text-[#5fd3e6] rounded-full hover:bg-[#5fd3e6]/10">My Trips</Button> 
           </a>
           
           <Popover >
@@ -67,10 +67,10 @@ function Header() {
                 googleLogout();
                 localStorage.clear();
                 window.location.reload();
-              }} className='mt-6 cursor-pointer'>Logout</h2></PopoverContent>
+              }} className='mt-6 cursor-pointer font-extrabold'>Logout</h2></PopoverContent>
           </Popover>
           </div>
-          : <Button onClick={()=>setOpenDailog(true)}>Sig In</Button>}
+          : <Button className="bg-[#5FD3E6] text-white rounded-full hover:bg-[#48bfd4]" onClick={()=>setOpenDailog(true)}>Sig In</Button>}
           
             
         </div>

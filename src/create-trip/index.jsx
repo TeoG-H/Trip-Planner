@@ -21,6 +21,7 @@ import { db } from "@/service/firebaseConfig";
 import { useNavigate} from "react-router-dom";
 import Header from "@/components/custom/Header";
 import RevealOnScroll from "./RevealOnScroll";
+import { Toaster } from "sonner";
 
 
 
@@ -163,6 +164,7 @@ navigate('/view-trip/'+documentId)
 
     {/* Gradient principal: alb în centru, albastru pal pe margini */}
     <div
+      
       className="pointer-events-none absolute inset-0 -z-10"
       style={{
         background: `
@@ -176,7 +178,7 @@ navigate('/view-trip/'+documentId)
         `
       }}
     />
-
+    <Toaster/>
     {/* Glow discret stânga sus */}
     <div className="pointer-events-none absolute -top-48 -left-48 w-[600px] h-[600px]
       bg-[#5fd3e6]/20 rounded-full blur-[120px] -z-10" />
