@@ -15,15 +15,15 @@ export const SelectTravelesList=[
  },
  {
     id:3,
-    title:'Family',
-    desc:'A group of fun loving adv',
+    title:'A Group',
+    desc:'A group of 3-5 adventure-loving travelers',
     icon:'👨‍👩‍👧',
     people:'3 to 5 People'
  },
  {
     id:4,
     title:'Friends',
-    desc:'A bunch of thrill-seekes',
+    desc:'5-10 people looking to create unforgettable memories',
     icon:'👯',
     people:'5 to 10 People'
  },
@@ -59,6 +59,7 @@ export const SelectTransportMode = [
     icon: "🚗",
     aiHint: "Include both city attractions and nearby destinations reachable within 2–3 hours by car."
   },
+
   {
     id: 2,
     value: "public_transport",
@@ -67,6 +68,7 @@ export const SelectTransportMode = [
     icon: "🚌",
     aiHint: "Recommend places reachable by public transport from the city, including nearby towns."
   },
+
   {
     id: 3,
     value: "walking",
@@ -75,6 +77,7 @@ export const SelectTransportMode = [
     icon: "🚶",
     aiHint: "Focus only on attractions located within walking distance inside the city."
   },
+
   {
     id: 4,
     value: "mixed",
@@ -181,8 +184,7 @@ export const SelectTravelerType = [
     title: "Solo Traveler",
     desc: "Independent travel focused on flexibility and personal interests",
     icon: "🧍",
-    aiHint:
-      "The trip is for a solo traveler, focusing on flexible and individual-friendly activities."
+    aiHint: "The trip is for a solo traveler, focusing on flexible and individual-friendly activities."
   },
   {
     id: 2,
@@ -190,8 +192,7 @@ export const SelectTravelerType = [
     title: "Couple",
     desc: "Romantic experiences and activities for two",
     icon: "💑",
-    aiHint:
-      "The trip is for a couple and should include romantic and intimate experiences."
+    aiHint: "The trip is for a couple and should include romantic and intimate experiences."
   },
   {
     id: 3,
@@ -199,8 +200,7 @@ export const SelectTravelerType = [
     title: "Friends",
     desc: "Fun, social activities suitable for groups",
     icon: "👫",
-    aiHint:
-      "The trip is for a group of friends and should include fun and social activities."
+    aiHint: "The trip is for a group of friends and should include fun and social activities."
   },
   {
     id: 4,
@@ -208,8 +208,7 @@ export const SelectTravelerType = [
     title: "Family",
     desc: "Family-friendly activities suitable for children",
     icon: "👨‍👩‍👧‍👦",
-    aiHint:
-      "The trip is for a family and should focus on family-friendly and child-safe activities."
+    aiHint: "The trip is for a family and should focus on family-friendly and child-safe activities."
   }
 ];
 

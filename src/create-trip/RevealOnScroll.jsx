@@ -1,17 +1,15 @@
 import { useEffect, useRef } from "react";
 
 export default function RevealOnScroll() {
-  const ref = useRef(null);
+  const ref = useRef(null); // useRef pt nu declanseaza re-render 
 
+  //apelez <div ref={heroRef}
   useEffect(() => {
-    const el = ref.current;
+    const el = ref.current;  //aici ia practic div-ul
     if (!el) return;
-
-    // starea inițială (ascuns)
-    el.style.opacity = "0";
-    el.style.transform = "translateY(60px)";
-    el.style.transition =
-      "opacity 0.9s ease-out, transform 0.9s ease-out";
+    el.style.opacity = "0"; //initial este invizibil
+    el.style.transform = "translateY(60px)"; //si il mut mai jos ca sa vina cumva de jos
+    el.style.transition ="opacity 0.9s ease-out, transform 0.9s ease-out";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -27,7 +25,7 @@ export default function RevealOnScroll() {
     observer.observe(el);
 
     return () => observer.disconnect();
-  }, []);
+  }, []); // lista goala deci ruleaza o sigura data 
 
   return ref;
 }

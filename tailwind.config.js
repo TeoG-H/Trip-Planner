@@ -53,8 +53,16 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+		fontSize: {
+			t: "clamp(2rem, 6vw, 4rem)",
+			h2: "clamp(1.5rem, 3.5vw, 2.25rem)",
+			h3: "clamp(1.1rem, 2.8vw, 1.55rem)",
+			cardT: "clamp(1.1rem,2.2vw,1.35rem)",
+			cardD: "clamp(0.85rem,1.8vw,0.95rem)",
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  
 }

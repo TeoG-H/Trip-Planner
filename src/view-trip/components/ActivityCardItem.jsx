@@ -35,33 +35,11 @@ function ActivityCardItem({ activity }) {
 };
 
   return (
-    <Link
-    to={
-      "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent(activity.name + " " + activity.location)
-    }
-    target="_blank"
-  >
-    <div
-      className="group
-        bg-white
-        rounded-2xl
-        overflow-hidden
-        shadow-sm
-        hover:shadow-xl
-        transition-all duration-300
-        hover:-translate-y-1
-        cursor-pointer
-      "
-    >
-      {/* IMAGE */}
-      <img
-        src={photoUrl || "/placeholder2.jpg"}
-        className="h-[240px] w-full object-cover"
-        alt={activity.name}
-      />
+    <Link to={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(activity.name + " " + activity.location)} target="_blank">
+    <div className="group  bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ">
+      
+      <img src={photoUrl || "/placeholder2.jpg"} className="h-[240px] w-full object-cover"/>
 
-      {/* CONTENT */}
       <div className="p-4 flex flex-col gap-1">
         <div className="flex justify-between items-start gap-2">
           <h3 className="font-semibold text-base leading-tight line-clamp-2">
@@ -69,17 +47,7 @@ function ActivityCardItem({ activity }) {
           </h3>
 
           {activity.relatedToPreferences && (
-            <span
-              className="
-                shrink-0
-                text-xs
-                px-3 py-1
-                rounded-full
-                bg-emerald-50
-                text-emerald-600
-                font-medium
-              "
-            >
+            <span className="shrink-0 text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 font-medium">
               Match
             </span>
           )}

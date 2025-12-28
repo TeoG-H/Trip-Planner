@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 function UserTripCardItem({trip}) {
   const[photoUrl, setPhotoUrl]=useState();
   
-      useEffect(()=>{trip&&GetPlacePhoto()},[trip])
-      const GetPlacePhoto = async () => {
+  useEffect(()=>{trip&&GetPlacePhoto()},[trip]);
+
+  const GetPlacePhoto = async () => {
     try {
       const location = trip?.userSelection?.location?.label;
   
@@ -28,17 +29,17 @@ function UserTripCardItem({trip}) {
         }
       }
     } catch {
-      console.log("No hero image found");
+      console.log("No image found");
     }
   }; 
   
   return (
     <Link to={'/view-trip/'+trip?.id}>
-    <div className='hover:scale-105 transition-all '>
-        <img src={photoUrl? photoUrl: '/placeholder2.jpg'} className='object-cover rounded-2xl px-3'/>
+    <div className='hover:scale-105 transition-all my-6 mx-4'>
+        <img src={photoUrl? photoUrl: '/placeholder2.jpg'} className='object-cover rounded-2xl w-full h-[180px]'/>
         <div>
-            <h2 className='font-bold text-lg'>{trip?.userSelection?.location?.label}</h2>
-            <h2 className='text-sm text-gray-500'>{trip?.userSelection?.noOfDays} Days trip with {trip?.userSelection?.budget} budget</h2>
+            <h2 className='font-bold text-cardT'>{trip?.userSelection?.location?.label}</h2>
+            <h2 className='text-cardD text-gray-500'>{trip?.userSelection?.noOfDays} Days trip with {trip?.userSelection?.budget} budget</h2>
         </div>
     </div>
     </Link>
