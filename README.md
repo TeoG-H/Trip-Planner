@@ -1,103 +1,74 @@
 # ✈️ Tripify – AI Travel Planner
 
-🔗 **Live demo:** https://tripplanner-vert.vercel.app/
 
----
-
-##  About the Project
-
-**Tripify** is a web application that generates **personalized travel itineraries** based on user preferences such as destination, budget, travel style, and group type.
-
-The app helps users quickly plan spontaneous or well-structured trips by providing:
-- day-by-day itineraries
-- recommended activities
-- restaurants
-- accommodation options  
-—all tailored to the user’s inputs.
-
-This project was built both out of **real personal need** for spontaneous travel planning and as a way to deepen my skills in **React, Tailwind CSS, UI/UX design, JavaScript**, and overall **web application architecture**.
-
----
-
-## 🚀 Features
-
--  **Destination selection**
-  - City / country / locality
-  - Google Places Autocomplete API
--  **Trip customization**
-  - Number of days
-  - Budget level
-  - Number of travelers (solo, couple, small group, large group)
-  - Travel type (couple, family, friends)
-  - Transportation mode
-  - Travel pace (relax / balanced / fast)
-  - Preferred activities
--  **AI-generated travel plan**
-  - Personalized itinerary
-  - Activities
-  - Restaurants
-  - Hotel recommendations
--  **Google Authentication**
-  - Sign in with Google
--  **Saved trips**
-  - Trips are stored in Firebase
-  - Accessible anytime from the user account
--  **Cloud deployment**
-  - Frontend on Vercel
-  - AI server on Render
-
----
-
-## 🧠 AI Integration
-
-Tripify uses **Generative AI** to create personalized travel plans.
-
-- A dynamic prompt is generated based on user inputs
-- The AI returns:
-  - day-by-day itineraries
-  - activities aligned with preferences
-  - restaurant and hotel suggestions
-- The AI logic runs on a **separate Node.js server**
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- React (Vite)
-- Tailwind CSS
-- shadcn/ui
-- JavaScript
-
-### Backend & Services
-- Node.js (AI server)
-- Firebase
-  - Authentication (Google Sign-In)
-  - Firestore Database
-- Google Places Autocomplete API
-- Generative AI (GenAI)
-
-### Deployment
-- Vercel – frontend
-- Render – backend / AI server
-
----
-
-## 📊 Project Status
-
-- ✅ Completed
-- 🟡 Beginner → Intermediate level
-
----
-
-## 🔮 Future Improvements
-
--  Map view for itinerary locations
--  Mobile-first optimizations
+🔗 **Live:** https://tripplanner-vert.vercel.app/
 
 
----
 
-## 📌 Live Application
+## About
 
-👉 https://tripplanner-vert.vercel.app/
+Tripify generates personalized travel itineraries based on user inputs: destination, number of days, budget, group type, transport mode, travel pace, and activity preferences. The result is a structured plan with a day-by-day itinerary, activities, restaurant suggestions, and hotel options.
+
+Built out of a real need for quick trip planning, and as a way to practice React, Tailwind, and full-stack architecture.
+
+![Home Page](images/pagina_de_pornire.png)
+
+##  Overview
+
+Tripify allows users to:
+
+- Select a destination using Google Places Autocomplete
+- Customize trip parameters (days, budget, group type, transport mode, travel pace, activity preferences)
+- Generate a structured itinerary powered by Gemini
+- Save and revisit past trips via Firestore
+  
+## How it works
+
+1. User fills in trip preferences via a form
+2. A dynamic prompt is constructed and sent to a Node.js backend
+3. The backend calls the Gemini API and returns a JSON travel plan
+4. The plan is saved to Firestore and displayed to the user
+5. Past trips are accessible from the user's account at any time
+
+
+
+## Tech Stack
+
+**Frontend** — React (Vite), Tailwind CSS  
+**Backend** — Node.js + Express   
+**AI** — Google Gemini   
+**Auth** — Google OAuth   
+**Database** — Firebase Firestore  
+**APIs** — Google Places Autocomplete, Google Places Photos  
+**Deployment** — Vercel (frontend), Render (backend)
+
+
+
+## Features
+
+- Google Places autocomplete for destination input
+- Trip form: days, budget, group size, traveler type, transport, pace, activity preferences (multi-select)
+- AI-generated itinerary saved to Firestore per user
+- Google Sign-In (required before generating a trip)
+- My Trips page to view past plans
+- Scroll reveal animations on the form sections
+
+### Destination Input
+![Destination](images/completare_destinatie.png)
+
+### Preferences Selection
+![Preferences](images/completare_preferinte.png)
+
+### Recommended Activities
+![Activities](images/activitati_generate.png)
+
+### Recommended Restaurants
+![Restaurants](images/restaurante_recomandate.png)
+
+### Recommended Hotels
+![Hotels](images/hoteluri_recomandate.png)
+
+### Recommended Itinerary
+![Itinerary](images/itinerariu_recomandat.png)
+
+Inspired by: https://youtu.be/f_7grfh9TxU?si=90xIsgNr75X0P-xI
