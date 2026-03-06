@@ -36,6 +36,7 @@ function CreateTrip() {
   const preferenceRef = RevealOnScroll();
   const buttonRef = RevealOnScroll();
   const navigate=useNavigate();
+  const [showSleepWarning, setShowSleepWarning] = useState(false);
 
 
   // e apelat la orice input
@@ -74,6 +75,13 @@ function CreateTrip() {
       {
         toast("Please fill all details");
         return;
+      }
+
+      const serverWoke = localStorage.getItem("serverWake");
+
+      if (!serverWoke) {
+        setShowSleepWarning(true);
+        localStorage.setItem("serverWake", "true");
       }
 
       setLoading(true);
@@ -326,6 +334,19 @@ function CreateTrip() {
               </DialogHeader>
             </DialogContent>
           </Dialog>
+          <Dialog open={showSleepWarning} onOpenChange={setShowSleepWarning}>
+          <DialogContent className="bg-white text-black">
+            <DialogHeader>
+              <DialogTitle>Server waking up</DialogTitle>
+              <DialogDescription>
+                The server was in sleep mode, so generating the trip may take up to about 4 minutes this time.
+                If you prefer, you can close the page and come back immediately — once the server wakes up, the app will work much faster.
+
+                Thank you for your patience! 🚀
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
         </div>
       </div>
     </div>
